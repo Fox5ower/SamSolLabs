@@ -1,0 +1,38 @@
+.container {
+  margin-top: 30px;
+}
+
+.first-link {
+  color: gray;
+}
+.first-link:hover {
+  color: yellow;
+}
+
+.first-link:active {
+  color: blueviolet;
+}
+
+.second-link {
+  text-decoration: none;
+}
+
+.second-link:hover {
+  text-decoration: underline;
+}
+
+.third-link {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  text-align: center;
+  height: 40px;
+  width: 100px;
+  line-height: 40px;
+  background-color: lightgreen;
+}
+
+.third-link:hover {
+  border-radius: 30px;
+  transition: 500ms;
+}

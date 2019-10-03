@@ -1,0 +1,26 @@
+body {
+  font-size: 18px;
+  color: gray;
+}
+
+div {
+  margin: 20px 0px 0px 0px;
+  text-indent: 25px;
+  width: 300px;
+}
+
+div:first-child {
+  color: pink;
+}
+
+div:nth-child(even) {
+  font-variant: small-caps;
+}
+
+div:nth-child(2) {
+  border: 5px blueviolet solid;
+}
+
+div:last-child {
+  font-variant: normal;
+}

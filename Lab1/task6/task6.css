@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  max-width: 700px;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.container div {
+  margin: 10px;
+}
+
+.box {
+  display: inline-block;
+  position: relative;
+  flex-basis: 20%;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+h3 {
+  border: 1px solid black;
+  background-color: lightyellow;
+  padding-right: 20px;
+  margin-top: 176px;
+  position: absolute;
+  text-align: center;
+  vertical-align: bottom;
+}
