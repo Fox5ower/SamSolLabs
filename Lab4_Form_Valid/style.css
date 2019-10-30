@@ -71,10 +71,6 @@ p {
 .padd {
   margin: 5px 0 0 0;
 }
-#range1,
-#range2 {
-  display: none;
-}
 
 div.switch > label > span.lever {
   margin: 0;
@@ -87,6 +83,7 @@ div.switch > label > span.lever {
   font-family: sans-serif;
   margin: 100px auto;
   padding: 20px;
+  text-align: center;
 }
 #drop-area.highlight {
   border-color: #80008031;
@@ -106,8 +103,7 @@ p {
 }
 #gallery img {
   width: 150px;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin: 10px 0;
   vertical-align: middle;
 }
 .button {
@@ -125,6 +121,27 @@ p {
 #fileElem {
   display: none;
 }
-#progress-bar {
-  margin: 20px 0;
+.progress-bar {
+  margin: 10px 0;
+  display: none;
+}
+
+.progHide {
+  display: none;
+}
+
+.progShow {
+  display: inline;
+}
+button.btn {
+  background-color: #83a8ff;
+}
+
+.range {
+  display: none;
+}
+
+p > input.range.show {
+  margin-top: 32px;
+  display: flex;
 }

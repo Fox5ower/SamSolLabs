@@ -9,6 +9,9 @@ let range1 = document.getElementById("range1");
 let check2 = document.getElementById("check2");
 let range2 = document.getElementById("range2");
 let dropArea = document.getElementById("drop-area");
+let progress = document.getElementById("progress-bar");
+let checks = Array.from(document.querySelectorAll(".check"));
+let range = Array.from(document.querySelectorAll(".range"));
 
 const green = "#4caf50";
 const red = "#f44336";
@@ -163,19 +166,15 @@ function checkIfCorrectPhone(field) {
 }
 
 function checkToRange() {
-  if (check1.checked && !check2.checked) {
-    range1.style.display = "inline-block";
-    check2.disabled = true;
-  } else if (!check1.checked && check2.checked) {
-    range1.style.display = "none";
-    range2.style.display = "inline-block";
-    check1.disabled = true;
-  } else if (!check1.checked && !check2.checked) {
-    range1.style.display = "none";
-    range2.style.display = "none";
-    check1.disabled = false;
-    check2.disabled = false;
-  }
+  checks.forEach(el =>
+    el.checked
+      ? range.map(node => {
+          node.name === el.name ? node.classList.add("show") : 0;
+        })
+      : range.map(node => {
+          node.name === el.name ? node.classList.remove("show") : 0;
+        })
+  );
 }
 
 // Prevent default
@@ -199,12 +198,20 @@ function preventDefaults(e) {
   e.stopPropagation();
 }
 
-function highlight(e) {
+function highlight() {
   dropArea.classList.add("highlight");
 }
 
-function unhighlight(e) {
+function unhighlight() {
   dropArea.classList.remove("active");
+}
+
+function hideProgress() {
+  progress.classList.remove("progShow");
+}
+
+function showProgress() {
+  progress.classList.add("progShow");
 }
 
 function handleDrop(e) {
@@ -230,7 +237,6 @@ function updateProgress(fileNumber, percent) {
   uploadProgress[fileNumber] = percent;
   let total =
     uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length;
-  console.debug("update", fileNumber, percent, total);
   progressBar.value = total;
 }
 
@@ -259,12 +265,14 @@ function uploadFile(file, i) {
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
   xhr.upload.addEventListener("progress", function(e) {
+    showProgress();
     updateProgress(i, (e.loaded * 100.0) / e.total || 100);
   });
 
   xhr.addEventListener("readystatechange", function(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
       updateProgress(i, 100);
+      hideProgress();
     } else if (xhr.readyState == 4 && xhr.status != 200) {
       alert("An error occured");
     }
