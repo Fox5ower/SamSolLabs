@@ -2,23 +2,49 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <title>Form</title>
 </head>
 
 <body>
     <div class="container">
         <h4 style="text-align: center;">ОСТАВЬТЕ СВОЙ ОТЗЫВ</h4>
-        <br>
-        <h6 style="text-align: center;">ПОМОГИТЕ НАШИМ ОТЕЛЯМ СТАТЬ ЛУЧШЕ! ОСТАВЬТЕ ОТЗЫВ О НИХ, <br> А ТАК ЖЕ О
-            ПОСЕЩЕННЫХ ВАМИ ДОСТОПРИМЕЧАТЕЛЬНОСТЯХ</h6><br><br>
+        <br />
+        <h6 class="main">
+            ПОМОГИТЕ НАШИМ ОТЕЛЯМ СТАТЬ ЛУЧШЕ! ОСТАВЬТЕ ОТЗЫВ О НИХ, <br />
+            А ТАК ЖЕ О ПОСЕЩЕННЫХ ВАМИ ДОСТОПРИМЕЧАТЕЛЬНОСТЯХ
+        </h6>
+        <br /><br />
         <div class="row">
             <form class="col s12" id="form" novalidate>
                 <div class="col s6">
+                    <h6><b>ВАШЕ ОБЩЕЕ ВПЕЧАТЛЕНИЕ</b></h6>
+
+                    <p>
+                        <label>
+                            <input class="with-gap" name="group" type="radio" value="Положительное" />
+                            <span>Скорее положительное</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input class="with-gap" name="group" type="radio" value="Отрицательное" />
+                            <span>Скорее отрицательное</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input class="with-gap" name="group" type="radio" value="Нет ответа" />
+                            <span>Затрудняюсь ответить</span>
+                        </label>
+                    </p>
+                </div>
+                <div class="col s6">
+                    <h6><b>ПРЕДСТАВЬТЕСЬ:</b></h6>
                     <div class="input-field row">
                         <label for="firstName">Имя</label>
                         <input type="text" name="Имя" id="firstName" onfocusout="validateFirstName()" />
@@ -37,29 +63,103 @@
                         <span class="helper-text"></span>
                     </div>
                 </div>
-                <!-- <div class="row">
+                <div class="col s12">
+                    <div class="col s12">
+                        <h6><b>КОНТАКТНАЯ ИНФОРМАЦИЯ</b></h6>
+                    </div>
+
                     <div class="input-field col s6">
-                        <label for="password">Password</label>
-                        <input type="password" name="Password" id="password" onfocusout="validatePassword()" />
+                        <label for="email">Телефон</label>
+                        <input type="tel" name="Телефон" id="phone" onfocusout="validatePhone()" />
                         <span class="helper-text"></span>
                     </div>
                     <div class="input-field col s6">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" name="Confirm Password" id="confirmPassword"
-                            onfocusout="validateConfirmPassword()" />
-                        <span class="helper-text"></span>
-                    </div>
-                </div> -->
-                <div class="row">
-                    <div class="input-field col s12">
                         <label for="email">Email</label>
                         <input type="email" name="Еmail" id="email" onfocusout="validateEmail()" />
                         <span class="helper-text"></span>
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit">
-                    SignUp
-                </button>
+                <div class="col s12">
+                    <div class="col s4">
+                        <label for="date">Даты поездки</label>
+                        <input type="date" name="date" id="date" />
+                        <span class="helper-text"></span>
+                    </div>
+                    <div class="col s4">
+                        <label>Выберите страну</label>
+                        <select style="display: block;">
+                            <option value="1">Беларусь</option>
+                            <option value="2">Италия</option>
+                            <option value="3">Эстония</option>
+                        </select>
+
+                    </div>
+                    <div class="input-field col s4"
+                        style="display: flex; flex-direction: column; justify-content:space-between; text-align:right;">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Гора Лысая</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Национальная Библиотека</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Гродненский зоопарк</span>
+                            </label>
+                        </p>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <h6><b>ОЦЕНИТЕ КАЧЕСТВО УСЛУГ ГИДА</b></h6>
+                    <div class="switch col s3 padd">
+                        <label>
+                            На родном языке
+                            <br>
+                            <input type="checkbox" id="check1" onchange="checkToRange()">
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                    <div class="col s9">
+                        <p class="range-field width">
+                            <input type="range" id="range1" min="0" max="100" />
+                        </p>
+                    </div>
+                    <div class="switch col s3 padd">
+                        <label>
+                            На языке посещенной страны
+                            <br>
+                            <input type="checkbox" id="check2" onchange="checkToRange()">
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                    <div class="col s9">
+                        <p class="range-field width">
+                            <input type="range" id="range2" min="0" max="100" />
+                        </p>
+                    </div>
+                </div>
+                <div id="drop-area" class="col s12">
+                    <p>Загрузите изображения с помощью диалога выбора файлов или перетащив нужные изображения в
+                        выделенную
+                        область</p>
+                    <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                    <label class="button" for="fileElem">Загрузить файл</label><br>
+                    <progress id="progress-bar" class="determinate" max=100 value=0></progress>
+                    <div id="gallery"></div>
+                </div>
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light padd" type="submit">
+                        Отправить
+                    </button>
+                </div>
+
             </form>
         </div>
     </div>
