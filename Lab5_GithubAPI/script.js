@@ -1,14 +1,18 @@
 const result = document.querySelector("#divResultFetch");
 const resultXhr = document.querySelector("#divResultXHR");
 const btnRepos = document.querySelector("#btnRepos");
+const xhrResponse = document.querySelector("#xhrResponse");
+const repoInfo = document.querySelector("#repo-info");
+const btnInfo = document.querySelector("#info");
 // increasing ratelimit to 5000 per hour by using client parameter with id and secret at url link
 const apiUrl =
   "https://api.github.com/users/fox5ower/repos?client_id=5061b3ada5641276927c&client_secret=50f4431076783688696b67b9f749761b28ced714";
-const xhrResponse = document.querySelector("#xhrResponse");
 
 btnRepos.onclick = () => getResponse(apiUrl);
 xhrResponse.onclick = () => xhrRes();
+btnInfo.onclick = () => fullInfo(apiUrl);
 
+//fetch, task 1, 2, 3
 async function getResponse(url) {
   const response = await fetch(url);
   const apiResult = await response.json();
@@ -29,6 +33,7 @@ async function getResponse(url) {
   });
 }
 
+//xhr task 4
 function xhrRes() {
   const xhr = new XMLHttpRequest();
 
@@ -52,7 +57,25 @@ function xhrRes() {
   xhr.send();
 }
 
-// authorizing function
+// task 5
+async function fullInfo(url) {
+  const response = await fetch(url);
+  const result = await response.json();
+  const paragraph = document.createElement("p");
+
+  result.forEach(repo => {
+    for (let key in repo) {
+      paragraph.appendChild(document.createTextNode(`${key}: ${repo[key]}`));
+      paragraph.appendChild(document.createElement("br"));
+    }
+    console.log(repo);
+    paragraph.appendChild(document.createElement("br"));
+    paragraph.appendChild(document.createElement("br"));
+  });
+  repoInfo.appendChild(paragraph);
+}
+
+// authorizing function for supertask
 
 // async function authorize() {
 //   const userame = "Fox5ower";
