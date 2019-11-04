@@ -65,7 +65,9 @@
                 </div>
                 <div class="col s12">
                     <div class="col s12">
-                        <h6><b>КОНТАКТНАЯ ИНФОРМАЦИЯ</b></h6>
+                        <div class="col s3"></div>
+                        <h6 class="col s6">КОНТАКТНАЯ ИНФОРМАЦИЯ</h6>
+                        <div class="col s3"></div>
                     </div>
 
                     <div class="input-field col s6">
@@ -117,7 +119,7 @@
                     </div>
                 </div>
                 <div class="col s12 check-range">
-                    <h6><b>ОЦЕНИТЕ КАЧЕСТВО УСЛУГ ГИДА</b></h6>
+                    <h6 class="col s12"><b>ОЦЕНИТЕ КАЧЕСТВО УСЛУГ ГИДА</b></h6>
                     <div class="switch col s3 padd">
                         <label>
                             На родном языке
@@ -145,14 +147,27 @@
                         </p>
                     </div>
                 </div>
-                <div id="drop-area" class="col s12">
-                    <p>Выберите изображение или перетащите его в выделенную область</p>
-                    <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
-                    <label class="button" for="fileElem">Загрузить файл</label><br>
-                    <progress id="progress-bar" class="progress-bar" max=100 value=0></progress>
+                <div class="col s12">
+                    <div class="col s4"></div>
+                    <div id="drop-area" class="col s4">
+                        <p>Выберите изображение или перетащите его в выделенную область</p>
+                        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                        <label class="button" for="fileElem">Загрузить файл</label><br>
+                        <progress id="progress-bar" class="progress-bar" max=100 value=0></progress>
 
-                    <div id="gallery"></div>
+                        <div id="gallery"></div>
+                    </div>
+                    <div class="col s4"></div>
                 </div>
+
+                <div class="row">
+                    <h6 class="col s12"><b>ОПИШИТЕ СВОИ ЭМОЦИИ</b></h6>
+                    <div class="input-field col s12">
+                        <textarea id="textarea" class="materialize-textarea"></textarea>
+                        <label for="textarea">Отзыв</label>
+                    </div>
+                </div>
+
                 <div class="col s12">
                     <button class="btn waves-effect waves-light padd" type="submit">
                         Отправить отзыв

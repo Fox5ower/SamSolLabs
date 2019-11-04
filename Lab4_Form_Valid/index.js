@@ -4,14 +4,14 @@ const thirdName = document.getElementById("thirdName");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const form = document.getElementById("form");
-let check1 = document.getElementById("check1");
-let range1 = document.getElementById("range1");
-let check2 = document.getElementById("check2");
-let range2 = document.getElementById("range2");
-let dropArea = document.getElementById("drop-area");
-let progress = document.getElementById("progress-bar");
-let checks = Array.from(document.querySelectorAll(".check"));
-let range = Array.from(document.querySelectorAll(".range"));
+// const check1 = document.getElementById("check1");
+// const range1 = document.getElementById("range1");
+// const check2 = document.getElementById("check2");
+// const range2 = document.getElementById("range2");
+const dropArea = document.getElementById("drop-area");
+const progress = document.getElementById("progress-bar");
+const checks = Array.from(document.querySelectorAll(".check"));
+const range = Array.from(document.querySelectorAll(".range"));
 
 const green = "#4caf50";
 const red = "#f44336";
@@ -177,6 +177,8 @@ function checkToRange() {
   );
 }
 
+// DRAG-N-DROP section, upload on server using cloudinary API
+
 // Prevent default
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
   dropArea.addEventListener(eventName, preventDefaults, false);
@@ -203,7 +205,7 @@ function highlight() {
 }
 
 function unhighlight() {
-  dropArea.classList.remove("active");
+  dropArea.classList.remove("highlight");
 }
 
 function hideProgress() {
@@ -258,7 +260,7 @@ function previewFile(file) {
 }
 
 function uploadFile(file, i) {
-  var url = "https://api.cloudinary.com/v1_1/dkirggnhn/image/upload";
+  var url = "https://api.cloudinary.com/v1_1/dkirggnhn/image/upload"; // API upload link
   var xhr = new XMLHttpRequest();
   var formData = new FormData();
   xhr.open("POST", url, true);
@@ -266,7 +268,7 @@ function uploadFile(file, i) {
 
   xhr.upload.addEventListener("progress", function(e) {
     showProgress();
-    updateProgress(i, (e.loaded * 100.0) / e.total || 100);
+    updateProgress(i, (e.loaded * 100.0) / e.total || 100); // Setting progress bar val
   });
 
   xhr.addEventListener("readystatechange", function(e) {
@@ -278,7 +280,7 @@ function uploadFile(file, i) {
     }
   });
 
-  formData.append("upload_preset", "hpkxi2js");
+  formData.append("upload_preset", "hpkxi2js"); // API preset name
   formData.append("file", file);
   xhr.send(formData);
 }
