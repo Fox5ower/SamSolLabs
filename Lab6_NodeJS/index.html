@@ -42,18 +42,15 @@
     </fieldset>
     <script>
 
-        //TASK 1
-        //_______________________________________________________________________________________//
         const name = document.querySelector("#name");
         const email = document.querySelector("#email");
         const bgcolor = document.querySelector("#bgcolor");
         const body = document.querySelector("body");
         const ad = document.querySelector("#ad");
         const hideAd = document.querySelector("#hideAd")
-        // const inpName = document.querySelector("#inpName");
-        // const inpPhone = document.querySelector("#inpPhone");
-        // const btnInsert = document.querySelector("#btnInsert");
-        // const output = document.querySelector("#output");
+
+        //TASK 1
+        //_______________________________________________________________________________________//
 
         bgcolor.addEventListener("click", changeColor);
         hideAd.addEventListener("click", hideMe);
@@ -124,30 +121,6 @@
             document.cookie = `expires=${date}`;
             ad.style.display = "none";
         }
-
-        //_____________________________________________________________________________________________//
-        //TASK 5
-
-        // btnInsert.onclick = function () {
-        //     const phoneOwner = inpName.value;
-        //     const phone = inpPhone.value;
-
-        //     if (phoneOwner && phone) {
-        //         localStorage.setItem(phoneOwner, phone);
-        //         location.reload();
-        //     }
-
-        // }
-
-        // for (let i = 2; i < localStorage.length; i++) {
-        //     const key = localStorage.key(i);
-        //     console.log(key);
-        //     const value = localStorage.getItem(key);
-        //     console.log(value);
-        //     output.innerHTML += `${key}: ${value}<br />`
-        // }
-
-
     </script>
 </body>
 
