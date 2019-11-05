@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        fieldset {
+            margin: 20px 0;
+            width: 21%;
+        }
+
+        #inpName,
+        #inpPhone,
+        #btnInsert {
+            height: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="GET">
+        <input type="text" id="name">
+        <input type="email" name="email" id="email">
+    </form>
+    <button id="bgcolor">Click me</button>
+    <div id="ad">Heres some ads..</div>
+    <button id="hideAd">Click to hide ad</button>
+    <br>
+    <fieldset>
+        <legend>Введите имя и номер телефона</legend>
+        <input id="inpName" type="text" placeholder="Введите имя...">
+        <input id="inpPhone" type="tel" placeholder="Введите телефон...">
+        <button type="button" id="btnInsert">Добавить в записную книжку</button>
+    </fieldset>
+    <fieldset>
+        <legend>Записная книжка</legend>
+        <div id="output"></div>
+    </fieldset>
+    <script>
+
+        //TASK 1
+        //_______________________________________________________________________________________//
+        const name = document.querySelector("#name");
+        const email = document.querySelector("#email");
+        const bgcolor = document.querySelector("#bgcolor");
+        const body = document.querySelector("body");
+        const ad = document.querySelector("#ad");
+        const hideAd = document.querySelector("#hideAd")
+        // const inpName = document.querySelector("#inpName");
+        // const inpPhone = document.querySelector("#inpPhone");
+        // const btnInsert = document.querySelector("#btnInsert");
+        // const output = document.querySelector("#output");
+
+        bgcolor.addEventListener("click", changeColor);
+        hideAd.addEventListener("click", hideMe);
+        let dateNow = new Date((Date.now()));
+        window.onload = () => {
+            localStorage.getItem('color') ?
+                body.style.backgroundColor = localStorage.getItem('color') : 0;
+            get_cookie("expires") < dateNow.toGMTString() ?
+                ad.style.display = "block"
+                : get_cookie("expires") > dateNow.toGMTString() ?
+                    ad.style.display = "none" : 0;
+
+        };
+
+        window.addEventListener('storage', function (e) {
+            body.style.backgroundColor = localStorage.getItem('color');
+        });
+
+        let count = -1
+        function changeColor() {
+            count++;
+            function choseColor() {
+                const colors = ["red", "green", "yellow", "black", "orange"];
+                let index = count;
+                index >= colors.length ? count = -1 : -1;
+                body.style.backgroundColor = colors[index];
+                return localStorage.setItem('color', body.style.backgroundColor);
+            }
+            choseColor();
+            return body.style.backgroundColor = localStorage.getItem('color');
+        }
+
+        //_______________________________________________________________________________________//
+        //TASK 2
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let savedFormData = localStorage.getItem("formData");
+            if (savedFormData) {
+                savedFormData = JSON.parse(savedFormData);
+                name.value = savedFormData.name;
+                email.value = savedFormData.email;
+                localStorage.removeItem("formData");
+                localStorage.clear();
+            }
+
+            window.addEventListener("beforeunload", e => {
+                if (name.value.length || email.value.length) {
+                    let formData = {
+                        name: name.value,
+                        email: email.value
+                    };
+                    localStorage.setItem("formData", JSON.stringify(formData));
+                }
+            });
+        });
+
+        //_____________________________________________________________________________________________//
+        //TASK 3
+
+        function get_cookie(cookie_name) {
+            const results = document.cookie.match('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
+            return results ? (unescape(results[2])) : null;
+        }
+
+        function hideMe() {
+            let date = new Date(Date.now() + 5000);
+            date = date.toUTCString();
+            document.cookie = `expires=${date}`;
+            ad.style.display = "none";
+        }
+
+        //_____________________________________________________________________________________________//
+        //TASK 5
+
+        // btnInsert.onclick = function () {
+        //     const phoneOwner = inpName.value;
+        //     const phone = inpPhone.value;
+
+        //     if (phoneOwner && phone) {
+        //         localStorage.setItem(phoneOwner, phone);
+        //         location.reload();
+        //     }
+
+        // }
+
+        // for (let i = 2; i < localStorage.length; i++) {
+        //     const key = localStorage.key(i);
+        //     console.log(key);
+        //     const value = localStorage.getItem(key);
+        //     console.log(value);
+        //     output.innerHTML += `${key}: ${value}<br />`
+        // }
+
+
+    </script>
+</body>
+
+</html>
