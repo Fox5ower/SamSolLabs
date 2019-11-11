@@ -83,16 +83,16 @@
                 </div>
                 <div class="col s12">
                     <div class="col s4">
-                        <label for="date">Даты поездки</label>
+                        <label for="date">Дата поездки</label>
                         <input type="date" name="date" id="date" />
                         <span class="helper-text"></span>
                     </div>
                     <div class="col s4">
                         <label>Выберите страну</label>
-                        <select style="display: block;">
-                            <option value="1">Беларусь</option>
-                            <option value="2">Италия</option>
-                            <option value="3">Эстония</option>
+                        <select style="display: block;" id="select">
+                            <option value="Беларусь">Беларусь</option>
+                            <option value="Италия">Италия</option>
+                            <option value="Эстония">Эстония</option>
                         </select>
 
                     </div>
@@ -100,19 +100,19 @@
                         style="display: flex; flex-direction: column; justify-content:space-between; text-align:right;">
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" class="place" value="Гора Лысая" />
                                 <span>Гора Лысая</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" class="place" value="Национальная Библиотека" />
                                 <span>Национальная Библиотека</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" class="place" value="Гродненский зоопарк" />
                                 <span>Гродненский зоопарк</span>
                             </label>
                         </p>
@@ -169,7 +169,7 @@
                 </div>
 
                 <div class="col s12">
-                    <button class="btn waves-effect waves-light padd" type="submit">
+                    <button class="btn waves-effect waves-light padd" type="submit" id="submit">
                         Отправить отзыв
                     </button>
                 </div>
@@ -177,6 +177,11 @@
             </form>
         </div>
     </div>
+    <div class="modal-window" id="modal">
+        <button class="close-button" id="close-button">Закрыть</button>
+        <div class="modal-item" id="modal-item"></div>
+    </div>
+    <div class="modal-bg" id="modal-bg"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="index.js"></script>
 </body>
