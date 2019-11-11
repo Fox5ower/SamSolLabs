@@ -4,28 +4,53 @@ const thirdName = document.getElementById("thirdName");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const form = document.getElementById("form");
-// const check1 = document.getElementById("check1");
-// const range1 = document.getElementById("range1");
-// const check2 = document.getElementById("check2");
-// const range2 = document.getElementById("range2");
 const dropArea = document.getElementById("drop-area");
 const progress = document.getElementById("progress-bar");
+const modal = document.querySelector("#modal");
+const modalOverlay = document.querySelector("#modal-bg");
+const modalItem = document.querySelector("#modal-item");
+const closeButton = document.querySelector("#close-button");
+const openButton = document.querySelector("#open-button");
+const submit = document.querySelector("#submit");
+const container = document.querySelector("div.container");
+const select = document.querySelector("#select");
+const travelDate = document.querySelector("#date");
+const places = Array.from(document.querySelectorAll(".place"));
 const checks = Array.from(document.querySelectorAll(".check"));
 const range = Array.from(document.querySelectorAll(".range"));
 
 const green = "#4caf50";
 const red = "#f44336";
 
-var guide;
-
-var radioContainer = document.querySelector("div.col.s6");
-var radios = radioContainer.getElementsByTagName("input");
-var temp;
+const radioContainer = document.querySelector("div.col.s6");
+const radios = radioContainer.getElementsByTagName("input");
+let temp;
 
 function pickRadio() {
-  for (var i = 0; i < radios.length; i++) {
+  for (let i = 0; i < radios.length; i++) {
     if (radios[i].type === "radio" && radios[i].checked) {
       temp = radios[i].value;
+      return temp;
+    }
+  }
+}
+
+function pickPlace() {
+  for (let i = 0; i < places.length; i++) {
+    if (places[i].type === "checkbox" && places[i].checked) {
+      temp = places[i].value;
+      return temp;
+    }
+  }
+}
+
+const rangeContainer = document.querySelector("div.col.s12.check-range");
+const ranges = document.querySelectorAll(".range");
+
+function pickRangeVal() {
+  for (let i = 0; i < ranges.length; i++) {
+    if (ranges[i].type === "range") {
+      temp = ranges[i].value;
       return temp;
     }
   }
@@ -37,9 +62,9 @@ form.addEventListener("submit", function(event) {
     validateFirstName() &&
     validateLastName() &&
     validateThirdName() &&
-    validateEmail()
+    validateEmail() &&
+    validatePhone()
   ) {
-    const container = document.querySelector("div.container");
     const loader = document.createElement("div");
     loader.className = "progress";
     const loadingBar = document.createElement("div");
@@ -48,23 +73,20 @@ form.addEventListener("submit", function(event) {
     container.appendChild(loader);
     setTimeout(function() {
       const loaderDiv = document.querySelector("div.progress");
-      const panel = document.createElement("div");
-      panel.className = "card-panel popUp";
-      const text = document.createElement("span");
-      text.appendChild(
-        document.createTextNode(
-          `CПАСИБО, ${lastName.value.toUpperCase()} ${firstName.value.toUpperCase()} ${thirdName.value.toUpperCase()}, ВАШ ОТЗЫВ ОТПРАВЛЕН!
+      modalItem.appendChild(
+        document.createTextNode(`CПАСИБО, ${lastName.value.toUpperCase()} ${firstName.value.toUpperCase()} ${thirdName.value.toUpperCase()}, ВАШ ОТЗЫВ ОТПРАВЛЕН!
         Суммарная информация
         Контакты: ${phone.value}, ${email.value}
-        Даты поездки:
-        Страна визита:
-        Посещенные достопримечательности:
+        Дата поездки: ${travelDate.value}
+        Страна визита: ${select.options[select.selectedIndex].value}
+        Посещенные достопримечательности: ${pickPlace()} 
         Оценка гида: ${pickRadio()}
-        Эмоции: `
-        )
+        Эмоции: ${pickRangeVal()}`)
       );
-      panel.appendChild(text);
-      container.replaceChild(panel, loaderDiv);
+      container.removeChild(loaderDiv);
+      modal.style.display = "block";
+      modalOverlay.style.display = "block";
+      form.reset();
     }, 1000);
   }
 });
@@ -178,6 +200,7 @@ function checkToRange() {
 }
 
 // DRAG-N-DROP section, upload on server using cloudinary API
+// При загрузке фотографий, они загружаются на сервер https://cloudinary.com/console/media_library/folders/%2Fdrag на мой аккаунт
 
 // Prevent default
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
@@ -285,33 +308,7 @@ function uploadFile(file, i) {
   xhr.send(formData);
 }
 
-// function openModal() {
-//   var modal = document.getElementById("zatemnenie");
-//   if (isEmail() === false || isPhone() === false) {
-//     modal.style.display = "block";
-//   }
-// }
-// function closeModal() {
-//   var modalClose = document.getElementById("close");
-//   var modal = document.getElementById("zatemnenie");
-//   modalClose.onclick = function() {
-//     modal.style.display = "none";
-//   };
-// }
-
-// function show() {
-//   var langCheck = document.getElementById("langHome");
-//   var langCheckVisit = document.getElementById("langVisit");
-//   var range1 = document.getElementById("range1");
-//   var range2 = document.getElementById("range2");
-//   if (langCheck.checked) {
-//     range1.style.display = "block";
-//   } else {
-//     range1.style.display = "none";
-//   }
-//   if (langCheckVisit.checked) {
-//     range2.style.display = "block";
-//   } else {
-//     range2.style.display = "none";
-//   }
-// }
+closeButton.addEventListener("click", function() {
+  modal.style.display = "none";
+  modalOverlay.style.display = "none";
+});
