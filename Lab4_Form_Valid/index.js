@@ -15,7 +15,9 @@ const submit = document.querySelector("#submit");
 const container = document.querySelector("div.container");
 const select = document.querySelector("#select");
 const travelDate = document.querySelector("#date");
-const places = Array.from(document.querySelectorAll(".place"));
+
+let placeNames = document.querySelectorAll(".placeName");
+let places = Array.from(document.querySelectorAll(".place"));
 const checks = Array.from(document.querySelectorAll(".check"));
 const range = Array.from(document.querySelectorAll(".range"));
 
@@ -35,13 +37,15 @@ function pickRadio() {
   }
 }
 
+var tempArr = [];
+
 function pickPlace() {
   for (let i = 0; i < places.length; i++) {
     if (places[i].type === "checkbox" && places[i].checked) {
-      temp = places[i].value;
-      return temp;
+      tempArr.push(places[i].value);
     }
   }
+  return tempArr.toString().replace(/,/g, ", ");
 }
 
 const rangeContainer = document.querySelector("div.col.s12.check-range");
@@ -56,6 +60,31 @@ function pickRangeVal() {
   }
 }
 
+select.addEventListener("change", event => {
+  for (opt of event.target.children) {
+    if (opt.selected) {
+      console.log(opt.value);
+      for (let i = 0; i < places.length; i++) {
+        places[i].value = opt.value;
+      }
+    }
+  }
+
+  if (select.options[select.selectedIndex].value == "Италия") {
+    placeNames[0].innerText = "Верона";
+    placeNames[1].innerText = "Пизанская башня";
+    placeNames[2].innerText = "Везувий";
+  } else if (select.options[select.selectedIndex].value == "Эстония") {
+    placeNames[0].innerText = "Валасте";
+    placeNames[1].innerText = "Ягала";
+    placeNames[2].innerText = "Замок Лоде";
+  } else if (select.options[select.selectedIndex].value == "Беларусь") {
+    placeNames[0].innerText = "Гора Лысая";
+    placeNames[1].innerText = "Национальная библиотека";
+    placeNames[2].innerText = "Гродненский зоопарк";
+  }
+});
+
 form.addEventListener("submit", function(event) {
   event.preventDefault();
   if (
@@ -66,8 +95,8 @@ form.addEventListener("submit", function(event) {
     validatePhone()
   ) {
     const loader = document.createElement("div");
-    loader.className = "progress";
     const loadingBar = document.createElement("div");
+    loader.className = "progress";
     loadingBar.className = "indeterminate";
     loader.appendChild(loadingBar);
     container.appendChild(loader);
@@ -75,19 +104,26 @@ form.addEventListener("submit", function(event) {
       const loaderDiv = document.querySelector("div.progress");
       modalItem.appendChild(
         document.createTextNode(`CПАСИБО, ${lastName.value.toUpperCase()} ${firstName.value.toUpperCase()} ${thirdName.value.toUpperCase()}, ВАШ ОТЗЫВ ОТПРАВЛЕН!
-        Суммарная информация
-        Контакты: ${phone.value}, ${email.value}
-        Дата поездки: ${travelDate.value}
-        Страна визита: ${select.options[select.selectedIndex].value}
-        Посещенные достопримечательности: ${pickPlace()} 
-        Оценка гида: ${pickRadio()}
-        Эмоции: ${pickRangeVal()}`)
+        Суммарная информация:
+        Контакты: ${phone.value}, ${email.value}.
+        Дата поездки: ${travelDate.value}.
+        Страна визита: ${select.options[select.selectedIndex].value}.
+        Оценка гида: ${pickRangeVal()}.
+        Эмоции: ${pickRadio()}.`)
       );
       container.removeChild(loaderDiv);
       modal.style.display = "block";
       modalOverlay.style.display = "block";
       form.reset();
     }, 1000);
+  } else {
+    modalItem.appendChild(
+      document.createTextNode(
+        "ДОПУЩЕНА ОШИБКА! При введении данных в одно из полей была допущена ошибка"
+      )
+    );
+    modal.style.display = "block";
+    modalOverlay.style.display = "block";
   }
 });
 
