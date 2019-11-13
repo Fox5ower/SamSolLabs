@@ -6,69 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        fieldset {
-            margin: 20px 0;
-            width: 21%;
-        }
-
-        #inpName,
-        #inpPhone,
-        #btnInsert {
-            height: 20px;
-            margin-top: 10px;
-        }
-    </style>
 </head>
 
 <body>
-    <!-- <form action="GET">
-        <input type="text" id="name">
-        <input type="email" name="email" id="email">
-    </form>
-    <button id="bgcolor">Click me</button>
-    <div id="ad">Heres some ads..</div>
-    <button id="hideAd">Click to hide ad</button>
-    <br> -->
-    <fieldset>
-        <legend>Введите имя и номер телефона</legend>
-        <input id="inpName" type="text" placeholder="Введите имя...">
-        <input id="inpPhone" type="tel" placeholder="Введите телефон...">
-        <button type="button" id="btnInsert">Добавить в записную книжку</button>
-    </fieldset>
-    <fieldset>
-        <legend>Записная книжка</legend>
-        <div id="output"></div>
-    </fieldset>
-    <script>
-
-        const inpName = document.querySelector("#inpName");
-        const inpPhone = document.querySelector("#inpPhone");
-        const btnInsert = document.querySelector("#btnInsert");
-        const output = document.querySelector("#output");
-
-        //_____________________________________________________________________________________________//
-        //TASK 5
-
-        btnInsert.onclick = function () {
-            const phoneOwner = inpName.value;
-            const phone = inpPhone.value;
-
-            if (phoneOwner && phone) {
-                localStorage.setItem(phoneOwner, phone);
-                location.reload();
-            }
-
-        }
-
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            console.log(key);
-            const value = localStorage.getItem(key);
-            console.log(value);
-            output.innerHTML += `${key}: ${value}<br />`
-        }
-    </script>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>
